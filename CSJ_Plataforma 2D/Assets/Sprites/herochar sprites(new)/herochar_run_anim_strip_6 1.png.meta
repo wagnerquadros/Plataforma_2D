@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 07137dcfbf35e074da0cee036dfb50fa
+guid: 245ae735cfae36e4eb534d69f0713bcb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_0
+      name: herochar_run_anim_strip_6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e9669254854fd14499f8881a695447c
-      internalID: -1721108739
+      spriteID: 46012cf9266441c4087eb52a7198f24d
+      internalID: 835842673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_1
+      name: herochar_run_anim_strip_6_1
       rect:
         serializedVersion: 2
         x: 16
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b51e9eba42aa2954bb7975b1f3d5fd86
-      internalID: 1923950283
+      spriteID: 015fdd82361064245a02b8b29da8dd8c
+      internalID: 1190005843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_2
+      name: herochar_run_anim_strip_6_2
       rect:
         serializedVersion: 2
         x: 32
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01fbab9de5a023241b5889281e2657f4
-      internalID: 1220767674
+      spriteID: f6d397bf8322bd842934f907624ae07d
+      internalID: -1434266033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_3
+      name: herochar_run_anim_strip_6_3
       rect:
         serializedVersion: 2
         x: 48
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3c2f5ade1c0b3440abfe2c7ebc3939d
-      internalID: 1456464252
+      spriteID: 911ee8eb780450c4dbe3403cf7a6276f
+      internalID: -77281468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_4
+      name: herochar_run_anim_strip_6_4
       rect:
         serializedVersion: 2
         x: 64
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16fd237d44ce22b4e9e6afaf7d9a7ea3
-      internalID: -1380413736
+      spriteID: 35ebb7b57489c974aa1d22be43532f19
+      internalID: 312576230
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: herochar_pushing_foward_anim_strip_6_5
+      name: herochar_run_anim_strip_6_5
       rect:
         serializedVersion: 2
         x: 80
@@ -255,8 +255,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb5f7ed3cb76444db20a01a1210f397
-      internalID: 1226070856
+      spriteID: f5a333a86cfdc0c49b38658f66f93a92
+      internalID: 506997230
       vertices: []
       indices: 
       edges: []
@@ -272,12 +272,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      herochar_pushing_foward_anim_strip_6_0: -1721108739
-      herochar_pushing_foward_anim_strip_6_1: 1923950283
-      herochar_pushing_foward_anim_strip_6_2: 1220767674
-      herochar_pushing_foward_anim_strip_6_3: 1456464252
-      herochar_pushing_foward_anim_strip_6_4: -1380413736
-      herochar_pushing_foward_anim_strip_6_5: 1226070856
+      herochar_run_anim_strip_6_0: 835842673
+      herochar_run_anim_strip_6_1: 1190005843
+      herochar_run_anim_strip_6_2: -1434266033
+      herochar_run_anim_strip_6_3: -77281468
+      herochar_run_anim_strip_6_4: 312576230
+      herochar_run_anim_strip_6_5: 506997230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -6,9 +6,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rig;
+    public Animator animator;
+    public Transform point;
+
+    public float radius;
     public float speed;
     public float jumpForce;
+
+    private bool isAttacking;
     private bool isJumping;
+    private bool doubleJump;
 
 
     // Start is called before the first frame update
@@ -21,6 +28,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Jump();
+        Attack();
     }
 
     void FixedUpdate()
@@ -33,24 +41,74 @@ public class Player : MonoBehaviour
         float movement = Input.GetAxis("Horizontal");
         rig.velocity = new Vector2(movement * speed, rig.velocity.y);
 
-        if(movement > 0)
+        if(movement > 0) 
         {
+            if (!isJumping && !isAttacking) // Caso não esteja pulando executa a animação de walk. Caso esteja pulando mantem a execução do jump.
+            {
+                animator.SetInteger("transition", 1);
+            }
             transform.eulerAngles = new Vector3(0,0,0);
         }
 
         if(movement < 0)
         {
+            if (!isJumping && !isAttacking)
+            {
+                animator.SetInteger("transition", 1);
+            }
             transform.eulerAngles = new Vector3(0,180,0);
+        }
+
+        if(movement == 0 && !isJumping && !isAttacking)
+        {
+            animator.SetInteger("transition", 0);
         }
     }
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (Input.GetButtonDown("Jump"))
         {
-            rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isJumping = true;
+            if (!isJumping)
+            {
+                animator.SetInteger("transition", 2);
+                rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+                doubleJump = true;
+            } 
+            else if(doubleJump) 
+            {
+                animator.SetInteger("transition", 2);
+                rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                doubleJump = false;
+            }
         }
+    }
+
+    void Attack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            isAttacking = true;
+            animator.SetInteger("transition", 3);
+            Collider2D hit = Physics2D.OverlapCircle(point.position, radius);
+            if (hit != null)
+            {
+                Debug.Log(hit.name);
+            }
+            StartCoroutine(OnAttack()); 
+        }
+    }
+
+    IEnumerator OnAttack()
+    {
+        yield return new WaitForSeconds(0.33f);
+        isAttacking = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(point.position, radius);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
