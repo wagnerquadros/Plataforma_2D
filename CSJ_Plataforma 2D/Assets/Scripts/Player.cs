@@ -6,9 +6,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rig;
-    public Animator animator;
+    public Animator anim;
     public Transform point;
 
+    public LayerMask enemyLayer;
+
+    public int health;
     public float radius;
     public float speed;
     public float jumpForce;
@@ -45,7 +48,7 @@ public class Player : MonoBehaviour
         {
             if (!isJumping && !isAttacking) // Caso não esteja pulando executa a animação de walk. Caso esteja pulando mantem a execução do jump.
             {
-                animator.SetInteger("transition", 1);
+                anim.SetInteger("transition", 1);
             }
             transform.eulerAngles = new Vector3(0,0,0);
         }
@@ -54,14 +57,14 @@ public class Player : MonoBehaviour
         {
             if (!isJumping && !isAttacking)
             {
-                animator.SetInteger("transition", 1);
+                anim.SetInteger("transition", 1);
             }
             transform.eulerAngles = new Vector3(0,180,0);
         }
 
         if(movement == 0 && !isJumping && !isAttacking)
         {
-            animator.SetInteger("transition", 0);
+            anim.SetInteger("transition", 0);
         }
     }
 
@@ -71,14 +74,14 @@ public class Player : MonoBehaviour
         {
             if (!isJumping)
             {
-                animator.SetInteger("transition", 2);
+                anim.SetInteger("transition", 2);
                 rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isJumping = true;
                 doubleJump = true;
             } 
             else if(doubleJump) 
             {
-                animator.SetInteger("transition", 2);
+                anim.SetInteger("transition", 2);
                 rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 doubleJump = false;
             }
@@ -90,11 +93,11 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-            animator.SetInteger("transition", 3);
-            Collider2D hit = Physics2D.OverlapCircle(point.position, radius);
+            anim.SetInteger("transition", 3);
+            Collider2D hit = Physics2D.OverlapCircle(point.position, radius, enemyLayer);
             if (hit != null)
             {
-                Debug.Log(hit.name);
+                hit.GetComponent<Sline>().OnHit();
             }
             StartCoroutine(OnAttack()); 
         }
@@ -104,6 +107,18 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.33f);
         isAttacking = false;
+    }
+
+    void OnHit()
+    {
+        anim.SetTrigger("hit");
+        health--;
+
+        if (health <= 0)
+        {
+            anim.SetTrigger("dead");
+            //game over
+        }
     }
 
     private void OnDrawGizmos()
@@ -116,6 +131,14 @@ public class Player : MonoBehaviour
         if(collision.gameObject.layer == 8)
         {
             isJumping = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 9)
+        {
+            OnHit();
         }
     }
 }
