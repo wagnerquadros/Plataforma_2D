@@ -8,11 +8,13 @@ public class Goblin : MonoBehaviour
 {
     private Rigidbody2D rig;
     private Vector2 direction;
+    public Animator anim;
     private bool isFront;
 
     public float stopDistance;
     public bool isRigth;
     public Transform point;
+    public Transform behind;
     public float speed;
     public float maxVision;
 
@@ -21,6 +23,7 @@ public class Goblin : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         if (isRigth) // vira para direita
         {
@@ -53,6 +56,7 @@ public class Goblin : MonoBehaviour
     {
         if(isFront)
         {
+            anim.SetInteger("transition", 1);
             if (isRigth) // vira para direita
             {
                 transform.eulerAngles = new Vector2(0, 0);
@@ -86,10 +90,20 @@ public class Goblin : MonoBehaviour
                 {
                     isFront = false;
                     rig.velocity = Vector2.zero;
-
+                    anim.SetInteger("transition", 2);
                     hit.transform.GetComponent<Player>().OnHit(); // ataca o player
                 }
 
+            }
+        }
+
+        RaycastHit2D behindHit = Physics2D.Raycast(behind.position, -direction, maxVision);
+
+        if(behindHit.collider != null)
+        {
+            if (behindHit.transform.CompareTag("Player"))
+            {
+                isRigth = !isRigth;
             }
         }
     }
@@ -97,5 +111,7 @@ public class Goblin : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(point.position, direction * maxVision);
+        Gizmos.DrawRay(behind.position, -direction * maxVision);
     }
+
 }
