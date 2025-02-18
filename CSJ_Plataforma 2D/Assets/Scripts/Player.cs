@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private bool isAttacking;
     private bool isJumping;
     private bool doubleJump;
+    private float recoveryCount;
+    private bool dead;
 
 
     // Start is called before the first frame update
@@ -109,13 +111,19 @@ public class Player : MonoBehaviour
         isAttacking = false;
     }
 
-    void OnHit()
+    public void OnHit()
     {
-        anim.SetTrigger("hit");
-        health--;
-
-        if (health <= 0)
+        recoveryCount += Time.deltaTime; // tempo de recuperaçao
+        if(recoveryCount >= 2f) // Lógica para o player tenha um tempo de recuperação de 2 segundos
         {
+            anim.SetTrigger("hit");
+            health--;
+            recoveryCount = 0;
+        }
+
+        if (health <= 0 && !dead)
+        {
+            dead = true;
             anim.SetTrigger("dead");
             //game over
         }

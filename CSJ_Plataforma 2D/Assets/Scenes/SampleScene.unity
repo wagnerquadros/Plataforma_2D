@@ -5158,7 +5158,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  health: 2
+  health: 5
   radius: 0.2
   speed: 5
   jumpForce: 10
@@ -5594,8 +5594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617397128faa54040ab529c1dc299ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stopDistance: 0.5
+  isRigth: 1
   point: {fileID: 976111170}
-  speed: 0
+  speed: 1
   maxVision: 3
 --- !u!50 &2132978170
 Rigidbody2D:
@@ -5709,7 +5711,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2080008558, guid: eb117b8a616672b4ab36873f74cc8a84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
