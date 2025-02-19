@@ -5607,7 +5607,7 @@ GameObject:
   - component: {fileID: 2132978170}
   - component: {fileID: 2132978169}
   - component: {fileID: 2132978174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyGoblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5627,6 +5627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  health: 3
   stopDistance: 0.5
   isRigth: 1
   point: {fileID: 976111170}

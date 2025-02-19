@@ -10,7 +10,7 @@ public class Goblin : MonoBehaviour
     private Vector2 direction;
     public Animator anim;
     private bool isFront;
-
+    public int health;
     public float stopDistance;
     public bool isRigth;
     public Transform point;
@@ -104,7 +104,21 @@ public class Goblin : MonoBehaviour
             if (behindHit.transform.CompareTag("Player"))
             {
                 isRigth = !isRigth;
+                isFront = true;
             }
+        }
+    }
+
+    public void OnHit()
+    {
+        anim.SetTrigger("hit"); // chama a animãção do hit
+        health--; // diminui a vida
+
+        if(health <= 0)  // verifica  se a vida  for menor ou igual  a =
+        {
+            speed = 0; // pára o inimigo
+            anim.SetTrigger("dead"); // chama a aniamção de morte
+            Destroy(gameObject,0.5f); // distroi o objeto
         }
     }
 
