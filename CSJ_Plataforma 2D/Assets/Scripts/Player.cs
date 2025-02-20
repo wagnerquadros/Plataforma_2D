@@ -152,9 +152,16 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 9)
+        if(collision.gameObject.layer == 9) // layer 9 -> Enemy
         {
             OnHit();
+        }
+
+        if (collision.CompareTag("Coin"))
+        {
+            collision.GetComponent<Animator>().SetTrigger("hit");
+            GameManeger.Instance.GetCoin();
+            Destroy(collision.gameObject, 0.5f);
         }
     }
 }
