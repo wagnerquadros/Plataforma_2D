@@ -22,14 +22,28 @@ public class Player : MonoBehaviour
     private float recoveryCount;
     private bool dead;
 
+    private static Player instance;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        DontDestroyOnLoad(this); // mantem um objeto entre cenas
+
+        if(instance == null) // checar se já existe um player na cena
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         Jump();
@@ -148,6 +162,11 @@ public class Player : MonoBehaviour
         {
             isJumping = false;
         }
+
+        if(collision.gameObject.layer == 11)
+        {
+            PlayerPosition.instance.CheckPoint();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -155,13 +174,19 @@ public class Player : MonoBehaviour
         if(collision.gameObject.layer == 9) // layer 9 -> Enemy
         {
             OnHit();
+            Debug.Log("wdadadad");
         }
 
         if (collision.CompareTag("Coin"))
         {
             collision.GetComponent<Animator>().SetTrigger("hit");
-            GameManeger.Instance.GetCoin();
+            GameManeger.instance.GetCoin();
             Destroy(collision.gameObject, 0.5f);
+        }
+
+        if(collision.gameObject.layer == 10)
+        {
+            GameManeger.instance.NextLevel();   
         }
     }
 }
